@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import uniquid from 'uniqid'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 function AgregarUsuario() {
 
@@ -20,7 +21,8 @@ const[telefono, setTelefono]=useState('')
 
    axios.post('/api/usuario/agregarusuario', usuario)
    .then (res => {
-    alert(res.data)
+    //alert(res.data) esto se implementa al inicio pero ya se hara uso de la libria "sweetalert2"
+    Swal.fire('Confirmado','El usuario se creo con exito')
    })
    .then(err => {console.log(err)})
   }
