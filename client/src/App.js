@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             Web sennovalab
           </a>
           <button
@@ -26,7 +26,7 @@ function App() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <a className="nav-link active" aria-current="page" href="/">
                   Inicio
                 </a>
               </li>
@@ -43,11 +43,11 @@ function App() {
         <Routes>
           <Route path="/" element={<ListaUsuarios />} exact></Route>
           <Route
-            path="agregarusuario"
+            path="/agregarusuario"
             element={<AgregarUsuario />}
             exact
           ></Route>
-          <Route path="editarusuario" element={<EditarUsuario />} exact></Route>
+          <Route path="/editarusuario/:idusuario" element={<EditarUsuario />} exact></Route>
         </Routes>
       </BrowserRouter>
     </div>
