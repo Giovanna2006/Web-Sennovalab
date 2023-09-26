@@ -4,10 +4,16 @@ const mongoose = require("mongoose");
 const eschema = mongoose.Schema;
 
 const eschemausuario = new eschema({
-  nombre: String,
+  idusuario: String,
+  name: String,
+  lastname: String,
   email: String,
   telefono: String,
-  idusuario: String,
+  current_password: String,
+  active: Boolean,
+  avatar: String,
+  address: String,
+  role: String,
 });
 
 const ModeloUsuario = mongoose.model("usuarios", eschemausuario);
@@ -21,8 +27,31 @@ function handleErrors(res, err) {
 // Ruta para agregar un usuario
 router.post("/agregarusuario", async (req, res) => {
   try {
-    const { nombre, email, telefono, idusuario } = req.body;
-    const nuevousuario = new ModeloUsuario({ nombre, email, telefono, idusuario });
+    const {
+      
+      idusuario,
+      name,
+      lastname,
+      email,
+      telefono,
+      current_password,
+      active,
+      avatar,
+      address,
+      role,
+    } = req.body;
+    const nuevousuario = new ModeloUsuario({
+      idusuario,
+      name,
+      lastname,
+      email,
+      telefono,
+      current_password,
+      active,
+      avatar,
+      address,
+      role,
+    });
     await nuevousuario.save();
     res.send("Usuario agregado correctamente");
   } catch (err) {
@@ -54,10 +83,31 @@ router.post("/obtenerdatausuario", async (req, res) => {
 // Ruta para actualizar un usuario por su ID
 router.post("/actualizausuario", async (req, res) => {
   try {
-    const { idusuario, nombre, email, telefono } = req.body;
+    const {
+      idusuario,
+      name,
+      lastname,
+      email,
+      telefono,
+      current_password,
+      active,
+      avatar,
+      address,
+      role,
+    } = req.body;
     const usuario = await ModeloUsuario.findOneAndUpdate(
       { idusuario },
-      { nombre, email, telefono },
+      {
+        name,
+        lastname,
+        email,
+        telefono,
+        current_password,
+        active,
+        avatar,
+        address,
+        role,
+      },
       { new: true } // Devuelve el usuario actualizado
     );
 
