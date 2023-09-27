@@ -2,6 +2,7 @@ import "./App.css";
 import ListaUsuarios from "./ListaUsuarios";
 import AgregarUsuario from "./AgregarUsuario";
 import EditarUsuario from "./EditarUsuario";
+import Login from "./login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -35,6 +36,11 @@ function App() {
                   Agregar Usuario
                 </a>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="login">
+                  Ingresar
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -48,6 +54,11 @@ function App() {
             exact
           ></Route>
           <Route path="/editarusuario/:idusuario" element={<EditarUsuario />} exact></Route>
+          <Route
+            path="/login"
+            element={<Login />}
+            exact
+          ></Route>
         </Routes>
       </BrowserRouter>
     </div>
