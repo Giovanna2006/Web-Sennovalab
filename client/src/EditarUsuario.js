@@ -1,21 +1,21 @@
 import axios from "axios";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function EditarUsuario() {
   // Hooks
   const params = useParams();
-  
-  const [name, setName] = useState(""); // Nueva propiedad
-  const [lastname, setLastname] = useState(""); // Nueva propiedad
+
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [current_password, setCurrentPassword] = useState(""); // Nueva propiedad
-  const [active, setActive] = useState(true); // Nueva propiedad
-  const [avatar, setAvatar] = useState(""); // Nueva propiedad
-  const [address, setAddress] = useState(""); // Nueva propiedad
-  const [role, setRole] = useState(""); // Nueva propiedad
+  const [current_password, setCurrentPassword] = useState("");
+  const [active, setActive] = useState(true);
+  const [avatar, setAvatar] = useState(""); // Estado para la URL de la imagen del avatar
+  const [address, setAddress] = useState("");
+  const [role, setRole] = useState("");
 
   // para volver hacia atrás al index o página de inicio
   const navegar = useNavigate();
@@ -26,17 +26,17 @@ function EditarUsuario() {
       .then((res) => {
         console.log(res.data[0]);
         const datausuario = res.data[0];
-        if (datausuario && typeof datausuario === 'object' && 'nombre' in datausuario) {
-         
+        if (datausuario && typeof datausuario === "object" && "name" in datausuario) {
           setName(datausuario.name);
           setLastname(datausuario.lastname);
           setEmail(datausuario.email);
           setTelefono(datausuario.telefono);
           setCurrentPassword(datausuario.current_password);
           setActive(datausuario.active);
-          setAvatar(datausuario.avatar);
           setAddress(datausuario.address);
           setRole(datausuario.role);
+          // Establecer la URL de la imagen del avatar
+          setAvatar(datausuario.avatar);
         } else {
           // Manejar el caso en que datausuario no es válido
           console.log("Los datos de usuario no son válidos.");
@@ -52,14 +52,13 @@ function EditarUsuario() {
     // Crear un nuevo objeto para actualizar el usuario
     const actualizarUsuario = {
       idusuario: params.idusuario,
-      // Agregar las nuevas propiedades
       name: name,
       lastname: lastname,
       email: email,
       telefono: telefono,
       current_password: current_password,
       active: active,
-      avatar: avatar,
+      avatar: avatar, // URL de la imagen del avatar
       address: address,
       role: role,
     };
@@ -69,9 +68,8 @@ function EditarUsuario() {
       .post("/api/usuario/actualizausuario", actualizarUsuario)
       .then((res) => {
         console.log(res.data);
-        //alert(res.data); se hace para obtener la alerta normal
-        Swal.fire('Confirmado', 'Se han guardado los cambios con éxito');
-        navegar('/');
+        Swal.fire("Confirmado", "Se han guardado los cambios con éxito");
+        navegar("/");
       })
       .catch((err) => {
         console.error(err);
@@ -86,7 +84,6 @@ function EditarUsuario() {
 
       <div className="row">
         <div className="col-sm-6 offset-3">
-          {/* Agregar campos para las nuevas propiedades */}
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
               Nombre:
@@ -98,7 +95,7 @@ function EditarUsuario() {
               onChange={(e) => {
                 setName(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="lastname" className="form-label">
@@ -111,7 +108,7 @@ function EditarUsuario() {
               onChange={(e) => {
                 setLastname(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
@@ -124,7 +121,7 @@ function EditarUsuario() {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="telefono" className="form-label">
@@ -137,7 +134,7 @@ function EditarUsuario() {
               onChange={(e) => {
                 setTelefono(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="current_password" className="form-label">
@@ -150,32 +147,68 @@ function EditarUsuario() {
               onChange={(e) => {
                 setCurrentPassword(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="active" className="form-label">
-              Activo:
+              Activo :
             </label>
-            <input
-              type="checkbox"
-              checked={active}
-              onChange={(e) => {
-                setActive(e.target.checked);
-              }}
-            ></input>
+            <div className="form-check form-check-inline">
+              <input
+                type="radio"
+                id="si"
+                name="active"
+                value="true"
+                checked={active === true}
+                onChange={() => setActive(true)}
+                className="form-check-input"
+              />
+              <label htmlFor="si" className="form-check-label">
+                Sí
+              </label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                type="radio"
+                id="no"
+                name="active"
+                value="false"
+                checked={active === false}
+                onChange={() => setActive(false)}
+                className="form-check-input"
+              />
+              <label htmlFor="no" className="form-check-label">
+                No
+              </label>
+            </div>
           </div>
+
           <div className="mb-3">
             <label htmlFor="avatar" className="form-label">
               Avatar:
             </label>
             <input
-              type="text"
+              type="file"
+              accept=".jpg, .jpeg, .png"
               className="form-control"
-              value={avatar}
               onChange={(e) => {
-                setAvatar(e.target.value);
+                const file = e.target.files[0];
+                if (file) {
+                  // Crear un objeto URL para mostrar la imagen previamente en la vista.
+                  const imageUrl = URL.createObjectURL(file);
+                  setAvatar(imageUrl); // Guardar la URL de la imagen en el estado.
+                  // También puedes guardar el archivo en el estado si lo necesitas para la subida al servidor.
+                }
               }}
-            ></input>
+            />
+            {/* Mostrar la imagen previamente seleccionada por el usuario */}
+            {avatar && (
+              <img
+                src={avatar}
+                alt="Avatar"
+                style={{ marginTop: "10px", maxWidth: "200px" }}
+              />
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="address" className="form-label">
@@ -188,20 +221,22 @@ function EditarUsuario() {
               onChange={(e) => {
                 setAddress(e.target.value);
               }}
-            ></input>
+            />
           </div>
           <div className="mb-3">
             <label htmlFor="role" className="form-label">
               Rol:
             </label>
-            <input
-              type="text"
+            <select
               className="form-control"
               value={role}
               onChange={(e) => {
                 setRole(e.target.value);
               }}
-            ></input>
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <button onClick={editarUsuario} className="btn btn-success">
             Editar usuario
