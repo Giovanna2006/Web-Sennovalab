@@ -38,9 +38,8 @@ function UsuarioIndividual({ usuario }) {
             <li className="list-group-item">Teléfono: {usuario.telefono}</li>
             <li className="list-group-item">Contraseña Actual: {usuario.current_password}</li>
             <li className="list-group-item">Activo: {usuario.active ? 'Sí' : 'No'}</li>
-            <li className="list-group-item">Avatar: {usuario.avatar}</li>
-            <li className="list-group-item">Dirección: {usuario.address}</li>
-            <li className="list-group-item">Rol: {usuario.role}</li>
+            <li className="list-group-item">Avatar: <img src={usuario.avatar} alt="Avatar" /></li>
+            <li className="list-group-item">Rol: {usuario.role === "admin" ? "Admin" : "User"}</li>
           </ul>
           <Link to={`/editarusuario/${usuario.idusuario}`}>
             <button className="btn btn-success">Editar</button>
@@ -62,4 +61,3 @@ function UsuarioIndividual({ usuario }) {
 }
 
 export default UsuarioIndividual;
-

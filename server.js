@@ -3,8 +3,12 @@ const app = express();
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 
-//importar conexion mongoDB
+// Importar las funciones para obtener datos de Colombia
+const { getDepartments, getMunicipalitiesByDepartment } = require("./colombiaData");
 
+
+
+//importar conexion mongoDB
 const archivoBD = require("./conexion");
 
 //importacion del archivo de rutas y modelo
@@ -37,11 +41,11 @@ app.post("/usuario/login", (req, res) => {
   // Aquí puedes verificar las credenciales en tu base de datos MongoDB
   // Si las credenciales son válidas, puedes responder con los datos del usuario
   // Si no son válidas, responde con un mensaje de error
-  if (name === "lua giovanna" && current_password === "12345") {
+  if (name === "luz" && current_password === "111111") {
     const datos = {
-      idusuario: "lmznj544",
-      name: "lua giovanna",
-      email: "lggg@gmail.com",
+      idusuario: "ln3vunzx",
+      name: "luz",
+      email: "garcia@gmail.com",
 
     };
     const token = jwt.sign(

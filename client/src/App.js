@@ -4,6 +4,7 @@ import AgregarUsuario from "./AgregarUsuario";
 import EditarUsuario from "./EditarUsuario";
 import Login from "./login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Departamentos from "./Departamentos";
 
 function App() {
   return (
@@ -41,6 +42,11 @@ function App() {
                   Ingresar
                 </a>
               </li>
+              <li className="nav-item">
+              <a className="nav-link" href="departamentos"> 
+                  Departamentos
+                  </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -59,6 +65,7 @@ function App() {
             element={<Login />}
             exact
           ></Route>
+           <Route path="/departamentos" element={<Departamentos />} exact />
         </Routes>
       </BrowserRouter>
     </div>
