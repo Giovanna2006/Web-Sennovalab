@@ -108,6 +108,8 @@ router.get("/obtenerusuarios", async (req, res) => {
   }
 });
 
+
+
 // Ruta para obtener data de un usuario por su ID
 router.post("/obtenerdatausuario", async (req, res) => {
   try {

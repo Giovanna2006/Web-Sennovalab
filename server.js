@@ -34,6 +34,8 @@ const verifyToken = (req, res, next) => {
     next();
   });
 };
+
+
 // Ruta para el proceso de login
 app.post("/usuario/login", (req, res) => {
   const  name = req.body.name;
@@ -41,10 +43,10 @@ app.post("/usuario/login", (req, res) => {
   // Aquí puedes verificar las credenciales en tu base de datos MongoDB
   // Si las credenciales son válidas, puedes responder con los datos del usuario
   // Si no son válidas, responde con un mensaje de error
-  if (name === "luz" && current_password === "111111") {
+  if (name === "luz fi" && current_password === "333333") {
     const datos = {
       idusuario: "ln3vunzx",
-      name: "luz",
+      name: "luz fi",
       email: "garcia@gmail.com",
 
     };
