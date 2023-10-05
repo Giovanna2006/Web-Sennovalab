@@ -5,7 +5,7 @@ const axios = require("axios");
 async function getDepartments() {
   try {
     const response = await axios.get(
-      "https://www.datos.gov.co/resource/xdk5-pm3f.json"
+      " https://www.datos.gov.co/resource/xdk5-pm3f.json"
     );
     const departments = response.data.map((item) => item.departamento);
     return departments;

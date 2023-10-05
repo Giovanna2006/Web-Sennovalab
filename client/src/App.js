@@ -5,6 +5,7 @@ import EditarUsuario from "./EditarUsuario";
 import Login from "./login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Departamentos from "./Departamentos";
+import ConsultaUsuario from "./ConsultarUsuario";
 
 function App() {
   return (
@@ -44,7 +45,12 @@ function App() {
               </li>
               <li className="nav-item">
               <a className="nav-link" href="departamentos"> 
-                  Departamentos
+                  Datos Abiertos 
+                  </a>
+              </li>
+              <li className="nav-item">
+              <a className="nav-link" href="consultausuario"> 
+                  Consultar Id
                   </a>
               </li>
             </ul>
@@ -66,6 +72,7 @@ function App() {
             exact
           ></Route>
            <Route path="/departamentos" element={<Departamentos />} exact />
+           <Route path="/consultausuario/:idusuario" component={ConsultaUsuario} /> 
         </Routes>
       </BrowserRouter>
     </div>
