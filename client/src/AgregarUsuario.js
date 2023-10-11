@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import uniquid from "uniqid";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 function AgregarUsuario() {
   // Hooks
-
+  const { v4: uuidv4 } = require("uuid");
   const [name, setName] = useState(null); // Nueva propiedad
   const [lastname, setLastname] = useState(null); // Nueva propiedad
   const [email, setEmail] = useState(null);
@@ -18,7 +17,7 @@ function AgregarUsuario() {
 
   function agregarUsuario() {
     var usuario = {
-      idusuario: uniquid(),
+      idusuario: uuidv4(), 
       name: name, // Asignar las nuevas propiedades al objeto de usuario
       lastname: lastname,
       email: email,

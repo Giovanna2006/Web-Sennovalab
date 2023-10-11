@@ -121,6 +121,7 @@ router.post("/obtenerdatausuario", async (req, res) => {
   }
 });
 
+
 // Ruta para actualizar un usuario por su ID
 router.post("/actualizausuario", async (req, res) => {
   try {
@@ -172,6 +173,22 @@ router.post("/borrarusuario", async (req, res) => {
     }
 
     res.send("Usuario borrado correctamente");
+  } catch (err) {
+    handleErrors(res, err);
+  }
+});
+
+// Ruta para obtener un usuario por su ID
+router.post("/consultarusuario", async (req, res) => {
+  try {
+    const { idusuario } = req.body;
+    const usuario = await ModeloUsuario.findOne({ idusuario });
+
+    if (!usuario) {
+      return res.status(404).send("Usuario no encontrado");
+    }
+
+    res.send(usuario);
   } catch (err) {
     handleErrors(res, err);
   }

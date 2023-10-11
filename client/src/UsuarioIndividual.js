@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import 'aos/dist/aos.css';
 
+
 function UsuarioIndividual({ usuario }) {
   // Función para borrar usuario
   function borrarusuario(idusuario) {
@@ -44,11 +45,13 @@ function UsuarioIndividual({ usuario }) {
           Borrar
         </button>
       </td>
+      <td>
+      <Link to={`/consultarusuario/${usuario.idusuario}`} className="btn btn-success">
+        Id
+        </Link>
+      </td>
     </tr>
   );
 }
-
-
-
 
 export default UsuarioIndividual;
