@@ -5,7 +5,7 @@ import EditarUsuario from "./EditarUsuario";
 import Login from "./login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Departamentos from "./Departamentos";
-import ConsultaUsuario from "./ConsultarUsuario";
+import ConsultarUsuario from "./ConsultarUsuario";
 
 function App() {
   return (
@@ -49,8 +49,8 @@ function App() {
                   </a>
               </li>
               <li className="nav-item">
-              <a className="nav-link" href="consultausuario"> 
-                  Consultar Id
+              <a className="nav-link" href="/consultarusuario/ln3vunzx"> 
+                  consutar ID
                   </a>
               </li>
             </ul>
@@ -72,7 +72,7 @@ function App() {
             exact
           ></Route>
            <Route path="/departamentos" element={<Departamentos />} exact />
-           <Route path="/consultausuario/:idusuario" component={ConsultaUsuario} /> 
+           <Route path="consultarusuario/:idUsuario" element={<ConsultarUsuario/>} exact></Route>
         </Routes>
       </BrowserRouter>
     </div>

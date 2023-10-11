@@ -43,11 +43,11 @@ app.post("/usuario/login", (req, res) => {
   // Aquí puedes verificar las credenciales en tu base de datos MongoDB
   // Si las credenciales son válidas, puedes responder con los datos del usuario
   // Si no son válidas, responde con un mensaje de error
-  if (name === "luz fi" && current_password === "333333") {
+  if (name === "camila" && current_password === "2222") {
     const datos = {
-      idusuario: "ln3vunzx",
-      name: "luz fi",
-      email: "garcia@gmail.com",
+      idusuario: "ca6006ae-a861-4043-98bb-2c211dde7062",
+      name: "camila",
+      email: "camilagmail.com",
 
     };
     const token = jwt.sign(
